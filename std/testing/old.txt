@@ -1,0 +1,46 @@
+goos: darwin
+goarch: amd64
+pkg: packages/std/testing
+cpu: Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz
+BenchmarkAdd-8    	1000000000	         0.3282 ns/op
+BenchmarkAdd-8    	1000000000	         0.3261 ns/op
+BenchmarkAdd-8    	1000000000	         0.3280 ns/op
+BenchmarkAdd-8    	1000000000	         0.3279 ns/op
+BenchmarkAdd-8    	1000000000	         0.3263 ns/op
+BenchmarkAdd-8    	1000000000	         0.3297 ns/op
+BenchmarkAdd-8    	1000000000	         0.3282 ns/op
+BenchmarkAdd-8    	1000000000	         0.3259 ns/op
+BenchmarkAdd-8    	1000000000	         0.3261 ns/op
+BenchmarkAdd-8    	1000000000	         0.3279 ns/op
+BenchmarkAdd-8    	1000000000	         0.3322 ns/op
+BenchmarkAdd-8    	1000000000	         0.3279 ns/op
+BenchmarkAdd-8    	1000000000	         0.3283 ns/op
+BenchmarkAdd-8    	1000000000	         0.3287 ns/op
+BenchmarkAdd-8    	1000000000	         0.3358 ns/op
+BenchmarkAdd-8    	1000000000	         0.3368 ns/op
+BenchmarkAdd-8    	1000000000	         0.3363 ns/op
+BenchmarkAdd-8    	1000000000	         0.6351 ns/op
+BenchmarkAdd-8    	1000000000	         0.3338 ns/op
+BenchmarkAdd-8    	1000000000	         0.3262 ns/op
+BenchmarkAdd1-8   	31100545	        39.06 ns/op
+BenchmarkAdd1-8   	30079794	        39.00 ns/op
+BenchmarkAdd1-8   	30374830	        38.85 ns/op
+BenchmarkAdd1-8   	30752120	        38.96 ns/op
+BenchmarkAdd1-8   	30756063	        38.90 ns/op
+BenchmarkAdd1-8   	31247028	        42.02 ns/op
+BenchmarkAdd1-8   	30847753	        39.04 ns/op
+BenchmarkAdd1-8   	30963478	        38.96 ns/op
+BenchmarkAdd1-8   	30825556	        38.96 ns/op
+BenchmarkAdd1-8   	30304920	        38.90 ns/op
+BenchmarkAdd1-8   	29713422	        39.00 ns/op
+BenchmarkAdd1-8   	31082623	        40.92 ns/op
+BenchmarkAdd1-8   	30056978	        39.46 ns/op
+BenchmarkAdd1-8   	30394492	        39.05 ns/op
+BenchmarkAdd1-8   	30736818	        38.94 ns/op
+BenchmarkAdd1-8   	31297413	        39.09 ns/op
+BenchmarkAdd1-8   	30699766	        38.89 ns/op
+BenchmarkAdd1-8   	30569650	        39.22 ns/op
+BenchmarkAdd1-8   	30186601	        39.86 ns/op
+BenchmarkAdd1-8   	30240784	        39.48 ns/op
+PASS
+ok  	packages/std/testing	34.464s

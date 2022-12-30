@@ -1,0 +1,10 @@
+Go write file tutorial shows how to write to files in Golang. Learn how to read files in Go in Go read file.
+
+To write to files in Go, we use the os, ioutil, and fmt packages.
+
+func (f *File) WriteString(s string) (n int, err error)
+The functions that we use typically return the number of bytes written and an error, if any.
+
+$ go version
+go version go1.18.1 linux/amd64
+We use Go version 1.18.
