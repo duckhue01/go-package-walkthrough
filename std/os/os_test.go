@@ -1,37 +1,55 @@
 package os_test
 
 import (
+	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"testing"
+	"testing/fstest"
 
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestRecursiveOpen(t *testing.T) {
-	t.Parallel()
+func recursiveOpen(fsys fs.FS) (int, error) {
 
-	got := func(folderName string) int {
-		fsys := os.DirFS(folderName)
-		count := 0
-		fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
-			if err != nil {
-				return nil
-			}
-
-			if filepath.Ext(path) == ".txt" {
-				count++
-			}
+	count := 0
+	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
 			return nil
-		})
+		}
 
-		return count
-	}("./findgo")
-	t.Log(got)
+		if filepath.Ext(path) == ".go" {
+			count++
+		}
+		return nil
+	})
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+
+}
+
+func TestRecursiveOpen(t *testing.T) {
+	got, err := recursiveOpen(&fstest.MapFS{
+		"file.go":                {},
+		"subfolder/subfolder.go": {},
+		"subfolder2/another.go":  {},
+		"subfolder2/file.go":     {},
+	})
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	if !cmp.Equal(got, 4) {
 		t.Errorf(cmp.Diff(got, 4))
 	}
+}
+
+func BenchmarkRecursiveOpen(b *testing.B) {
+
 }
 
 func TestOpenFile(t *testing.T) {
@@ -61,4 +79,19 @@ func TestReadFile(t *testing.T) {
 	}()
 
 	t.Log(got)
+}
+
+func IORedirection() {
+	fmt.Fprint(os.Stdout, "asdasasd")
+}
+
+type Write struct {
+}
+
+func (w *Write) Write(p []byte) (n int, err error) {
+	return 1, nil
+}
+
+func TestIORedirection(t *testing.T) {
+	IORedirection()
 }

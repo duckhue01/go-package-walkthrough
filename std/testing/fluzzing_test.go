@@ -1,29 +1,41 @@
 package testing_test
 
 import (
+	"errors"
 	"testing"
+	"unicode/utf8"
 )
 
-func FuzzHex(f *testing.F) {
-	for _, seed := range [][]byte{{}, {0}, {9}, {0xa}, {0xf}, {1, 2, 3, 4}} {
-		f.Add(seed)
+func Reverse(s string) (string, error) {
+	if !utf8.ValidString(s) {
+		return s, errors.New("Input is not valid UTF-8")
 	}
-	f.Fuzz(func(t *testing.T, in []byte) {
-
-	})
+	b := []rune(s)
+	for i, j := 0, len(b)-1; i < len(b)/2; i, j = i+1, j-1 {
+		b[i], b[j] = b[j], b[i]
+	}
+	return string(b), nil
 }
 
-func Equal(a, b []byte) bool {
-	for i := 0; i < len(a); i++ {
-		if a[i] != b[i] {
-			return false
+func FuzzReverse(f *testing.F) {
+	f.Fuzz(func(t *testing.T, orig string) {
+		rev, err := Reverse(orig)
+		if err != nil {
+			t.Skip("Skipped")
 		}
-	}
-	return true
-}
 
-func FuzzEqual(f *testing.F) {
-	f.Fuzz(func(t *testing.T, a []byte, b []byte) {
-		Equal(a, b)
+		if utf8.ValidString(orig) && !utf8.ValidString(rev) {
+			t.Errorf("Reverse produced invalid UTF-8 string %q", rev)
+		}
+
+		var doubleRev string
+		doubleRev, err = Reverse(rev)
+		if err != nil {
+			t.Skip()
+		}
+		if orig != doubleRev {
+			t.Errorf("Before: %q, after: %q", orig, doubleRev)
+		}
 	})
 }
+
