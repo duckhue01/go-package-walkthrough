@@ -1,4 +1,4 @@
-module packages
+module github.com/duckhue01/go/pkg
 
 go 1.18
 
